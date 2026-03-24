@@ -1,3 +1,61 @@
-`timescale 1ns/1ps
+<s> AQUI ESCRIBIREMOS LA RESPUESTA AL PROBLEMA. ###
+module seq_det(input clk, rst_n, data_in, output reg detected);
+parameter IDLE=3'b000;
+parameter S1 = 3'b001;
+parameter S10 = 3'b010;
+parameter S101 = 3'b011;
+parameter S1011 = 3'b100;
 
-.moduleDetectordeSecuencia1011(inputclk,rst_n,data_in,outputdetected);parameterIDLE=3'b000,S1=3'b001,S10=3'b010,S101=3'b011,S1011=3'b100;reg[2:0]state,next_state;always_ff@(posedgeclk,negedgerst_n)beginif(~rst_n)state<=IDLE;elsestate<=next_state;endalways_combbeginnext_state=IDLE;case(state)IDLE:if(data_in)next_state=S1;elsenext_state=IDLE;S1:if(data_in)next_state=S10;elsenext_state=IDLE;S10:if(data_in)next_state=S101;elsenext_state=IDLE;S101:if(data_in)next_state=S1011;elsenext_state=IDLE;S1011:if(data_in)next_state=S1011;elsenext_state=IDLE;endcaseendmodulemoduleĠtop_module(Ċmodule_interface.slaveĠm_if);ĊĊĠĠ//ĠDeclareĠinternalĠsignalsĊĠĠlogicĠ[7:0]Ġdata_in;ĊĠĠlogicĠ[7:0]Ġdata_out;ĊĠĠlogicĠ[7:0]Ġaddress;ĊĠĠlogicĠ[7:0]Ġdata_out_reg;ĊĠĠlogicĠ[7:0]Ġdata_in_reg;ĊĠĠlogicĠ[7:0]Ġaddress_reg;ĊĠĠlogicĠ[7:0]Ġdata_out_reg_next;ĊĠĠlogicĠ[7:0]Ġdata_in_reg_next;ĊĠĠlogicĠ[7:0]Ġaddress_reg_next;ĊĠĠlogicĠ[7:0]Ġdata_out_reg_next_next;ĊĠĠlogicĠ[7:0]Ġdata_in_reg_next_next;ĊĠĠlogicĠ[7:0]Ġaddress_reg_next_next;ĊĠĠlogicĠ[7:0]Ġdata_out_reg_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_in_reg_next_next_next;ĊĠĠlogicĠ[7:0]Ġaddress_reg_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_out_reg_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_in_reg_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġaddress_reg_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_out_reg_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_in_reg_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġaddress_reg_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_out_reg_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_in_reg_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġaddress_reg_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_out_reg_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_in_reg_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġaddress_reg_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_out_reg_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_in_reg_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġaddress_reg_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_out_reg_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_in_reg_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġaddress_reg_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_out_reg_next_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_in_reg_next_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġaddress_reg_next_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_out_reg_next_next_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_in_reg_next_next_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġaddress_reg_next_next_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_out_reg_next_next_next_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_in_reg_next_next_next_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġaddress_reg_next_next_next_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_out_reg_next_next_next_next_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_in_reg_next_next_next_next_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġaddress_reg_next_next_next_next_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_out_reg_next_next_next_next_next_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_in_reg_next_next_next_next_next_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġaddress_reg_next_next_next_next_next_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_out_reg_next_next_next_next_next_next_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_in_reg_next_next_next_next_next_next_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġaddress_reg_next_next_next_next_next_next_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_out_reg_next_next_next_next_next_next_next_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_in_reg_next_next_next_next_next_next_next_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġaddress_reg_next_next_next_next_next_next_next_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_out_reg_next_next_next_next_next_next_next_next_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_in_reg_next_next_next_next_next_next_next_next_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġaddress_reg_next_next_next_next_next_next_next_next_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0]Ġdata_out_reg_next_next_next_next_next_next_next_next_next_next_next_next_next_next_next_next_next_next;ĊĠĠlogicĠ[7:0
+reg [2:0] state, next_state;
+
+always_ff @(posedge clk or negedge rst_n) begin
+if (!rst_n) begin
+state <= IDLE;
+detected <= 1'b0;
+end else begin
+state <= next_state;
+detected <= (state == S1011);
+end
+end
+
+always @* begin
+case (state)
+IDLE: begin
+if (data_in) begin
+next_state = S1;
+end else begin
+next_state = IDLE;
+end
+end
+
+  S1: begin
+    if (data_in) begin
+      next_state = S10;
+    end else begin
+      next_state = S1;
+    end
+  end
+  
+  S10: begin
+    if (data_in) begin
+      next_state = S101;
+    end else begin
+      next_state = IDLE;
+    end
+  end
+  
+  S101: begin
+    if (data_in) begin
+      next_state = S1011;
+    end else begin
+      next_state = S1;
+    end
+  end
+  
+  S1011: begin
+    next_state = S1;
+  end
+endcase
+end
+
+endmodule

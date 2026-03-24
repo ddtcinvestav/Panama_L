@@ -1,3 +1,39 @@
-`timescale 1ns/1ps
+<s> module alu (a, b, op, result, zero, carry, overflow, negative);
+input [7:0] a, b;
+input [3:0] op;
+output [7:0] result;
+output zero, carry, overflow, negative;
 
-.moduleALU(input[7:0]a,b,input[3:0]op,outputreg[7:0]result,outputregzero,outputregcarry,outputregoverflow,outputregnegative);ĊmoduleĠALU(ĊĠĠĠĠinputĠ[7:0]Ġa,ĊĠĠĠĠinputĠ[7:0]Ġb,ĊĠĠĠĠinputĠ[3:0]Ġop,ĊĠĠĠĠoutputĠregĠ[7:0]Ġresult,ĊĠĠĠĠoutputĠregĠzero,ĊĠĠĠĠoutputĠregĠcarry,ĊĠĠĠĠoutputĠregĠoverflow,ĊĠĠĠĠoutputĠregĠnegativeĊ);ĊĊĠĠĠĠalwaysĠ@(*)ĠbeginĊĠĠĠĠĠĠĠĠcase(op)ĊĠĠĠĠĠĠĠĠĠĠĠĠ4'b0000:ĠbeginĠ//ĠADDĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠresultĠ=ĠaĠ+Ġb;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġ(result[8]Ġ==Ġ1);ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ(a[7]Ġ==Ġb[7]Ġ&&Ġa[7]Ġ!=Ġresult[7]);ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠzeroĠ=Ġ(resultĠ==Ġ8'b0);ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġresult[7];ĊĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠ4'b0001:ĠbeginĠ//ĠSUBĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠresultĠ=ĠaĠ-Ġb;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġ(result[8]Ġ==Ġ1);ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ(a[7]Ġ!=Ġb[7]Ġ&&Ġa[7]Ġ!=Ġresult[7]);ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠzeroĠ=Ġ(resultĠ==Ġ8'b0);ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġresult[7];ĊĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠ4'b0010:ĠbeginĠ//ĠANDĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠresultĠ=ĠaĠ&Ġb;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġ1'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ1'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠzeroĠ=Ġ(resultĠ==Ġ8'b0);ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġresult[7];ĊĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠ4'b0011:ĠbeginĠ//ĠORĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠresultĠ=ĠaĠ|Ġb;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġ1'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ1'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠzeroĠ=Ġ(resultĠ==Ġ8'b0);ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġresult[7];ĊĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠ4'b0100:ĠbeginĠ//ĠXORĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠresultĠ=ĠaĠ^Ġb;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġ1'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ1'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠzeroĠ=Ġ(resultĠ==Ġ8'b0);ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġresult[7];ĊĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠ4'b0101:ĠbeginĠ//ĠNOTĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠresultĠ=Ġ~a;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġ1'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ1'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠzeroĠ=Ġ(resultĠ==Ġ8'b0);ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġresult[7];ĊĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠ4'b0110:ĠbeginĠ//ĠSHLĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠresultĠ=ĠaĠ<<Ġ1;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġa[7];ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ(a[7]Ġ!=Ġresult[7]);ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠzeroĠ=Ġ(resultĠ==Ġ8'b0);ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġresult[7];ĊĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠ4'b0111:ĠbeginĠ//ĠSHRĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠresultĠ=ĠaĠ>>Ġ1;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġa[0];ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ(a[0]Ġ!=Ġresult[0]);ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠzeroĠ=Ġ(resultĠ==Ġ8'b0);ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġresult[7];ĊĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠ4'b1000:ĠbeginĠ//ĠSLTĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠresultĠ=Ġ(aĠ<Ġb)Ġ?Ġ8'b1Ġ:Ġ8'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġ1'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ1'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠzeroĠ=Ġ(resultĠ==Ġ8'b0);ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġresult[7];ĊĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠ4'b1001:ĠbeginĠ//ĠMULĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠresultĠ=Ġa[3:0]Ġ*Ġb[3:0];ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġ1'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ1'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠzeroĠ=Ġ(resultĠ==Ġ8'b0);ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġresult[7];ĊĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠdefault:ĠbeginĠ//ĠNOPĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠresultĠ=Ġ8'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġ1'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ1'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠzeroĠ=Ġ1'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġ1'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠendcaseĊĠĠĠĠendĊĊendmodulemoduleĠtop_module(ĊĠĠĠĠinputĠ[7:0]Ġa,ĊĠĠĠĠinputĠ[7:0]Ġb,ĊĠĠĠĠinputĠ[3:0]Ġop,ĊĠĠĠĠoutputĠregĠ[7:0]Ġresult,ĊĠĠĠĠoutputĠregĠzero,ĊĠĠĠĠoutputĠregĠcarry,ĊĠĠĠĠoutputĠregĠoverflow,ĊĠĠĠĠoutputĠregĠnegativeĊ);ĊĊĠĠĠĠALUĠalu_inst(ĊĠĠĠĠĠĠĠĠ.a(a),ĊĠĠĠĠĠĠĠĠ.b(b),ĊĠĠĠĠĠĠĠĠ.op(op),ĊĠĠĠĠĠĠĠĠ.result(result),ĊĠĠĠĠĠĠĠĠ.zero(zero),ĊĠĠĠĠĠĠĠĠ.carry(carry),ĊĠĠĠĠĠĠĠĠ.overflow(overflow),ĊĠĠĠĠĠĠĠĠ.negative(negative)ĊĠĠĠĠ);ĊĊendmodulemoduleĠtop_module(ĊĠĠĠĠinputĠ[7:0]Ġa,ĊĠĠĠĠinputĠ[7:0]Ġb,ĊĠĠĠĠinputĠ[3:0]Ġop,ĊĠĠĠĠoutputĠregĠ[7:0]Ġresult,ĊĠĠĠĠoutputĠregĠzero,ĊĠĠĠĠoutputĠregĠcarry,ĊĠĠĠĠoutputĠregĠoverflow,ĊĠĠĠĠoutputĠregĠnegativeĊ);ĊĊĠĠĠĠALUĠalu_inst(ĊĠĠĠĠĠĠĠĠ.a(a),ĊĠĠĠĠĠĠĠĠ.b(b),ĊĠĠĠĠĠĠĠĠ.op(op),ĊĠĠĠĠĠĠĠĠ.result(result),ĊĠĠĠĠĠĠĠĠ.zero(zero),ĊĠĠĠĠĠĠĠĠ.carry(carry),ĊĠĠĠĠĠĠĠĠ.overflow(overflow),ĊĠĠĠĠĠĠĠĠ.negative(negative)ĊĠĠĠĠ);ĊĊĠĠĠĠalwaysĠ@(posedgeĠclk)ĠbeginĊĠĠĠĠĠĠĠĠifĠ(reset)ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠresultĠ<=Ġ8'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠzeroĠ<=Ġ1'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ<=Ġ1'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ<=Ġ1'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ<=Ġ1'b0;ĊĠĠĠĠĠĠĠĠendĠelseĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠresultĠ<=Ġalu_inst.result;ĊĠĠĠĠĠĠĠĠĠĠĠĠzeroĠ<=Ġalu_inst.zero;ĊĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ<=Ġalu_inst.carry;ĊĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ<=Ġalu_inst.overflow;ĊĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ<=Ġalu_inst.negative;ĊĠĠĠĠĠĠĠĠendĊĠĠĠĠendĊĊendmodulemoduleĠtop_module(ĊĠĠĠĠinputĠ[7:0]Ġa,ĊĠĠĠĠinputĠ[7:0]Ġb,ĊĠĠĠĠinputĠ[3:0]Ġop,ĊĠĠĠĠoutputĠregĠ[7:0]Ġresult,ĊĠĠĠĠoutputĠregĠzero,ĊĠĠĠĠoutputĠregĠcarry,ĊĠĠĠĠoutputĠregĠoverflow,ĊĠĠĠĠoutputĠregĠnegativeĊ);ĊĊĠĠĠĠALUĠalu_inst(ĊĠĠĠĠĠĠĠĠ.a(a),ĊĠĠĠĠĠĠĠĠ.b(b),ĊĠĠĠĠĠĠĠĠ.op(op),ĊĠĠĠĠĠĠĠĠ.result(result),ĊĠĠĠĠĠĠĠĠ.zero(zero),ĊĠĠĠĠĠĠĠĠ.carry(carry),ĊĠĠĠĠĠĠĠĠ.overflow(overflow),ĊĠĠĠĠĠĠĠĠ.negative(negative)ĊĠĠĠĠ);ĊĊĠĠĠĠalwaysĠ@(posedgeĠclk)ĠbeginĊĠĠĠĠĠĠĠĠifĠ(reset)ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠresultĠ<=Ġ8'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠzeroĠ<=Ġ1'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ<=Ġ1'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ<=Ġ1'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ<=Ġ1'b0;ĊĠĠĠĠĠĠĠĠendĠelseĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠresultĠ<=Ġalu_inst.result;ĊĠĠĠĠĠĠĠĠĠĠĠĠzeroĠ<=Ġalu_inst.zero;ĊĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ<=Ġalu_inst.carry;ĊĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ<=Ġalu_inst.overflow;ĊĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ<=Ġalu_inst.negative;ĊĠĠĠĠĠĠĠĠendĊĠĠĠĠendĊĊendmodulemoduleĠtop_module(ĊĠĠĠĠinputĠ[7:0]Ġa,ĊĠĠĠĠinputĠ[7:0]Ġb,ĊĠĠĠĠinputĠ[3:0]Ġop,ĊĠĠĠĠoutputĠregĠ[7:0]Ġresult,ĊĠĠĠĠoutputĠregĠzero,ĊĠĠĠĠoutputĠregĠcarry,ĊĠĠĠĠoutputĠregĠoverflow,ĊĠĠĠĠoutputĠregĠnegativeĊ);ĊĊĠĠĠĠALUĠalu_inst(ĊĠĠĠĠĠĠĠĠ.a(a),ĊĠĠĠĠĠĠĠĠ.b(b),ĊĠĠĠĠĠĠĠĠ.op(op),ĊĠĠĠĠĠĠĠĠ.result(result),ĊĠĠĠĠĠĠĠĠ.zero(zero),ĊĠĠĠĠĠĠĠĠ.carry(carry),ĊĠĠĠĠĠĠĠĠ.overflow(overflow),ĊĠĠĠĠĠĠĠĠ.negative(negative)ĊĠĠĠĠ);ĊĊĠĠĠĠalwaysĠ@(posedgeĠclk)ĠbeginĊĠĠĠĠĠĠĠĠifĠ(reset)ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠresultĠ<=Ġ8'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠzeroĠ<=Ġ1'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ<=Ġ1'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ<=Ġ1'b0;ĊĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ<=Ġ1'b0;ĊĠĠĠĠĠĠĠĠendĠelseĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠresultĠ<=Ġalu_inst.result;ĊĠĠĠĠĠĠĠĠĠĠĠĠzeroĠ<=Ġalu_inst.zero;ĊĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ<=Ġalu_inst.carry;ĊĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ<=Ġalu_inst.overflow;ĊĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ<=Ġalu_inst.negative;ĊĠĠĠĠĠĠĠĠendĊĠĠĠĠendĊĊendmodulemoduleĠtop_module(ĊĠĠĠĠinputĠ[7:0]Ġa,ĊĠĠĠĠinputĠ[7:0]Ġb,ĊĠĠĠĠinputĠ[3:0]Ġop,ĊĠĠĠĠoutputĠregĠ[7:0]Ġresult,ĊĠĠĠĠoutputĠregĠzero,ĊĠĠĠĠoutputĠregĠcarry,ĊĠĠĠĠoutputĠregĠoverflow,ĊĠĠĠĠoutputĠregĠnegativeĊ);ĊĊĠĠĠĠALUĠalu_inst(ĊĠĠĠĠĠĠĠĠ.a(a),ĊĠĠĠĠĠĠĠĠ.b(b),ĊĠĠĠĠĠĠĠĠ.op(op),ĊĠĠĠĠĠĠĠĠ.result(result),ĊĠĠĠĠĠĠĠĠ.zero(zero),ĊĠĠĠĠĠĠĠĠ.carry(carry),ĊĠĠĠĠĠĠĠĠ.overflow(overflow),ĊĠĠĠĠĠĠĠĠ.negative(negative)ĊĠĠĠĠ);ĊĊĠĠĠĠalwaysĠ@(posedgeĠclk)ĠbeginĊĠĠĠĠĠĠĠĠifĠ(reset)ĠbeginĊ
+assign {carry, overflow} = 2'b00;
+assign negative = (result[7] == 1);
+assign zero = (result == 8'h00);
+
+always_comb begin
+case (op)
+4'h0: result = a + b;
+4'h1: result = a - b;
+4'h2: result = a & b;
+4'h3: result = a | b;
+4'h4: result = a ^ b;
+4'h5: result = ~a;
+4'h6: result = {1'b0, a[7:1]};
+4'h7: result = {a[0], a[7:1]};
+4'h8: result = (a[3:0] * b[3:0]) % 2;
+default: result = 8'h00;
+endcase
+
+if (op == 4'h0) begin
+  carry = a[7] ^ b[7];
+  overflow = (a[6] & b[6]) ^ (~a[6] & ~b[6]);
+end else if (op == 4'h1) begin
+  carry = a[7] ^ b[7];
+  overflow = (a[6] & ~b[6]) ^ (~a[6] & b[6]);
+end else if (op == 4'h6) begin
+  carry = a[7];
+end else if (op == 4'h7) begin
+  carry = a[0];
+end else if (op == 4'h8) begin
+  overflow = (a[3:0] * b[3:0]) > 8'hFF;
+end
+end
+endmodule

@@ -1,3 +1,62 @@
-`timescale 1ns/1ps
+module alu (input logic [7:0] a, b, input logic [3:0] op,
+output logic [7:0] result, output logic zero, carry, overflow, negative);
+wire [8:0] sum;
+wire [8:0] diff;
+wire [7:0] mux_result;
 
-.modulealu(input[7:0]a,b,op,output[7:0]r,zero,carry,overflow,negative);reg[7:0]r;regzero,carry,overflow,negative;always@(aĠorĠbĠorĠop)begincase(op)0:beginr=a+b;carry=a[7]^b[7]^r[7];overflow=(a[7]&b[7]&~r[7])|(~a[7]&~b[7]&r[7]);negative=r[7];end1:beginr=a-b;carry=a[7]^b[7]^r[7];overflow=(a[7]&~b[7]&~r[7])|(~a[7]&b[7]&r[7]);negative=r[7];end2:beginr=a&b;carry=0;overflow=0;negative=r[7];end3:beginr=a|b;carry=0;overflow=0;negative=r[7];end4:beginr=a^b;carry=0;overflow=0;negative=r[7];end5:beginr=~a;carry=0;overflow=0;negative=r[7];end6:beginr=a<<1;carry=a[7];overflow=0;negative=r[7];end7:beginr=a>>1;carry=a[0];overflow=0;negative=r[7];end8:beginr=(a<b)?1:0;carry=0;overflow=0;negative=r[7];end9:beginr=a[3:0]*b[3:0];carry=0;overflow=0;negative=r[7];enddefault:beginr=0;carry=0;overflow=0;negative=r[7];endendcasezero=(r==0);endmodulemoduleĠtop_module(Ċmodule_inputs,Ġmodule_outputs);ĊĊinputĠ[7:0]Ġmodule_inputs;ĊoutputĠ[7:0]Ġmodule_outputs;ĊĊwireĠ[7:0]Ġa,Ġb,Ġop;ĊwireĠ[7:0]Ġr;ĊwireĠzero,Ġcarry,Ġoverflow,Ġnegative;ĊĊassignĠaĠ=Ġmodule_inputs[7:0];ĊassignĠbĠ=Ġmodule_inputs[15:8];ĊassignĠopĠ=Ġmodule_inputs[23:16];ĊĊaluĠalu_inst(a,Ġb,Ġop,Ġr,Ġzero,Ġcarry,Ġoverflow,Ġnegative);ĊĊassignĠmodule_outputsĠ=Ġ{r,Ġzero,Ġcarry,Ġoverflow,Ġnegative};ĊĊendmoduleĊĊmoduleĠalu(a,Ġb,Ġop,Ġr,Ġzero,Ġcarry,Ġoverflow,Ġnegative);ĊĊinputĠ[7:0]Ġa,Ġb;ĊinputĠ[3:0]Ġop;ĊoutputĠ[7:0]Ġr;ĊoutputĠzero,Ġcarry,Ġoverflow,Ġnegative;ĊĊregĠ[7:0]Ġr;ĊregĠzero,Ġcarry,Ġoverflow,Ġnegative;ĊĊalwaysĠ@(aĠorĠbĠorĠop)ĠbeginĊĠĠĠĠcaseĠ(op)ĊĠĠĠĠĠĠĠĠ4'b0000:ĠbeginĠ//ĠADDĊĠĠĠĠĠĠĠĠĠĠĠĠrĠ=ĠaĠ+Ġb;ĊĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġa[7]Ġ^Ġb[7]Ġ^Ġr[7];ĊĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ(a[7]Ġ&Ġb[7]Ġ&Ġ~r[7])Ġ|Ġ(~a[7]Ġ&Ġ~b[7]Ġ&Ġr[7]);ĊĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġr[7];ĊĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠ4'b0001:ĠbeginĠ//ĠSUBĊĠĠĠĠĠĠĠĠĠĠĠĠrĠ=ĠaĠ-Ġb;ĊĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġa[7]Ġ^Ġb[7]Ġ^Ġr[7];ĊĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ(a[7]Ġ&Ġ~b[7]Ġ&Ġ~r[7])Ġ|Ġ(~a[7]Ġ&Ġb[7]Ġ&Ġr[7]);ĊĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġr[7];ĊĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠ4'b0010:ĠbeginĠ//ĠANDĊĠĠĠĠĠĠĠĠĠĠĠĠrĠ=ĠaĠ&Ġb;ĊĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġr[7];ĊĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠ4'b0011:ĠbeginĠ//ĠORĊĠĠĠĠĠĠĠĠĠĠĠĠrĠ=ĠaĠ|Ġb;ĊĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġr[7];ĊĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠ4'b0100:ĠbeginĠ//ĠXORĊĠĠĠĠĠĠĠĠĠĠĠĠrĠ=ĠaĠ^Ġb;ĊĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġr[7];ĊĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠ4'b0101:ĠbeginĠ//ĠNOTĊĠĠĠĠĠĠĠĠĠĠĠĠrĠ=Ġ~a;ĊĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġr[7];ĊĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠ4'b0110:ĠbeginĠ//ĠSHLĊĠĠĠĠĠĠĠĠĠĠĠĠrĠ=ĠaĠ<<Ġ1;ĊĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġa[7];ĊĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġr[7];ĊĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠ4'b0111:ĠbeginĠ//ĠSHRĊĠĠĠĠĠĠĠĠĠĠĠĠrĠ=ĠaĠ>>Ġ1;ĊĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġa[0];ĊĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġr[7];ĊĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠ4'b1000:ĠbeginĠ//ĠSLTĊĠĠĠĠĠĠĠĠĠĠĠĠrĠ=Ġ(aĠ<Ġb)Ġ?Ġ1Ġ:Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġr[7];ĊĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠ4'b1001:ĠbeginĠ//ĠMULĊĠĠĠĠĠĠĠĠĠĠĠĠrĠ=Ġa[3:0]Ġ*Ġb[3:0];ĊĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġr[7];ĊĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠdefault:ĠbeginĠ//ĠDefaultĊĠĠĠĠĠĠĠĠĠĠĠĠrĠ=Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġr[7];ĊĠĠĠĠĠĠĠĠendĊĠĠĠĠendcaseĊendĊĊassignĠzeroĠ=Ġ(rĠ==Ġ0);ĊĊendmodulemoduleĠtop_module(module_inputs,Ġmodule_outputs);ĊĊinputĠ[7:0]Ġmodule_inputs;ĊoutputĠ[7:0]Ġmodule_outputs;ĊĊwireĠ[7:0]Ġa,Ġb,Ġop;ĊwireĠ[7:0]Ġr;ĊwireĠzero,Ġcarry,Ġoverflow,Ġnegative;ĊĊassignĠaĠ=Ġmodule_inputs[7:0];ĊassignĠbĠ=Ġmodule_inputs[15:8];ĊassignĠopĠ=Ġmodule_inputs[23:16];ĊĊaluĠalu_inst(a,Ġb,Ġop,Ġr,Ġzero,Ġcarry,Ġoverflow,Ġnegative);ĊĊassignĠmodule_outputsĠ=Ġ{r,Ġzero,Ġcarry,Ġoverflow,Ġnegative};ĊĊendmoduleĊĊmoduleĠalu(a,Ġb,Ġop,Ġr,Ġzero,Ġcarry,Ġoverflow,Ġnegative);ĊĊinputĠ[7:0]Ġa,Ġb;ĊinputĠ[3:0]Ġop;ĊoutputĠ[7:0]Ġr;ĊoutputĠzero,Ġcarry,Ġoverflow,Ġnegative;ĊĊregĠ[7:0]Ġr;ĊregĠzero,Ġcarry,Ġoverflow,Ġnegative;ĊĊalwaysĠ@(aĠorĠbĠorĠop)ĠbeginĊĠĠĠĠcaseĠ(op)ĊĠĠĠĠĠĠĠĠ4'b0000:ĠbeginĠ//ĠADDĊĠĠĠĠĠĠĠĠĠĠĠĠrĠ=ĠaĠ+Ġb;ĊĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġa[7]Ġ^Ġb[7]Ġ^Ġr[7];ĊĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ(a[7]Ġ&Ġb[7]Ġ&Ġ~r[7])Ġ|Ġ(~a[7]Ġ&Ġ~b[7]Ġ&Ġr[7]);ĊĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġr[7];ĊĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠ4'b0001:ĠbeginĠ//ĠSUBĊĠĠĠĠĠĠĠĠĠĠĠĠrĠ=ĠaĠ-Ġb;ĊĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġa[7]Ġ^Ġb[7]Ġ^Ġr[7];ĊĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ(a[7]Ġ&Ġ~b[7]Ġ&Ġ~r[7])Ġ|Ġ(~a[7]Ġ&Ġb[7]Ġ&Ġr[7]);ĊĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġr[7];ĊĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠ4'b0010:ĠbeginĠ//ĠANDĊĠĠĠĠĠĠĠĠĠĠĠĠrĠ=ĠaĠ&Ġb;ĊĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġr[7];ĊĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠ4'b0011:ĠbeginĠ//ĠORĊĠĠĠĠĠĠĠĠĠĠĠĠrĠ=ĠaĠ|Ġb;ĊĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġr[7];ĊĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠ4'b0100:ĠbeginĠ//ĠXORĊĠĠĠĠĠĠĠĠĠĠĠĠrĠ=ĠaĠ^Ġb;ĊĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġr[7];ĊĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠ4'b0101:ĠbeginĠ//ĠNOTĊĠĠĠĠĠĠĠĠĠĠĠĠrĠ=Ġ~a;ĊĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġr[7];ĊĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠ4'b0110:ĠbeginĠ//ĠSHLĊĠĠĠĠĠĠĠĠĠĠĠĠrĠ=ĠaĠ<<Ġ1;ĊĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġa[7];ĊĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġr[7];ĊĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠ4'b0111:ĠbeginĠ//ĠSHRĊĠĠĠĠĠĠĠĠĠĠĠĠrĠ=ĠaĠ>>Ġ1;ĊĠĠĠĠĠĠĠĠĠĠĠĠcarryĠ=Ġa[0];ĊĠĠĠĠĠĠĠĠĠĠĠĠoverflowĠ=Ġ0;ĊĠĠĠĠĠĠĠĠĠĠĠĠnegativeĠ=Ġr[7];ĊĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠ4'
+// Unidad aritmética
+always_comb begin
+if (op == 4'h0) begin
+sum = {1'b0, a} + {1'b0, b};
+carry = (a[7] ^ b[7]) ^ result[7];
+overflow = (a[6] & b[6]) | (~a[6] & ~b[6]);
+end else if (op == 4'h1) begin
+diff = {1'b0, a} - {1'b0, b};
+carry = (a[7] ^ ~b[7]) ^ result[7];
+overflow = (~a[6] & b[6]) | (a[6] & ~b[6]);
+end else begin
+sum = 9'h0;
+diff = 9'h0;
+carry = 1'b0;
+overflow = 1'b0;
+end
+end
+
+// Unidad lógica
+always_comb begin
+if (op == 4'h2) begin
+mux_result = a & b;
+end else if (op == 4'h3) begin
+mux_result = a | b;
+end else if (op == 4'h4) begin
+mux_result = a ^ b;
+end else if (op == 4'h5) begin
+mux_result = ~a;
+end else if (op == 4'h6) begin
+mux_result = {a[6:0], 1'b0};
+end else if (op == 4'h7) begin
+mux_result = {1'b0, a[7:1]};
+end else if (op == 4'h8) begin
+mux_result = (a < b) ? 9'h1 : 9'h0;
+end else if (op == 4'h9) begin
+mux_result = a[3:0] * b[3:0];
+end else begin
+mux_result = 8'h0;
+end
+end
+
+// MUX salida
+always @(*) begin
+case (op)
+4'h0, 4'h1: result = sum[7:0];
+default: result = mux_result[7:0];
+endcase
+end
+
+// Banderas
+assign zero = (result == 8'h00);
+assign negative = result[7];
+assign carry = (op == 4'h6) ? a[7] : (op == 4'h7) ? a[0] : carry;
+assign overflow = (op == 4'h0 || op == 4'h1) ? overflow : 1'b0;
+
+endmodule

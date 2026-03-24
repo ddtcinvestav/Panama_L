@@ -1,3 +1,60 @@
-`timescale 1ns/1ps
+module seq_det(input logic clk, rst_n, data_in, output logic detected);
+parameter IDLE=3'b000;
+parameter S1 = 3'b001;
+parameter S10 = 3'b010;
+parameter S101 = 3'b011;
+parameter S1011 = 3'b100;
 
-moduleĠseq_det(ĊmoduleĠseq_det(ĊĠĠĠĠinputĠlogicĠclk,ĊĠĠĠĠinputĠlogicĠrst_n,ĊĠĠĠĠinputĠlogicĠdata_in,ĊĠĠĠĠoutputĠlogicĠdetectedĊ);ĊĊĠĠĠĠtypedefĠenumĠlogicĠ[2:0]Ġ{ĊĠĠĠĠĠĠĠĠIDLEĠ=Ġ3'b000,ĊĠĠĠĠĠĠĠĠS1Ġ=Ġ3'b001,ĊĠĠĠĠĠĠĠĠS10Ġ=Ġ3'b010,ĊĠĠĠĠĠĠĠĠS101Ġ=Ġ3'b011,ĊĠĠĠĠĠĠĠĠS1011Ġ=Ġ3'b100ĊĠĠĠĠ}Ġstate_t;ĊĊĠĠĠĠstate_tĠstate,Ġnext_state;ĊĊĠĠĠĠalways_ffĠ@(posedgeĠclkĠorĠnegedgeĠrst_n)ĠbeginĊĠĠĠĠĠĠĠĠifĠ(~rst_n)ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠstateĠ<=ĠIDLE;ĊĠĠĠĠĠĠĠĠendĠelseĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠstateĠ<=Ġnext_state;ĊĠĠĠĠĠĠĠĠendĊĠĠĠĠendĊĊĠĠĠĠalways_combĠbeginĊĠĠĠĠĠĠĠĠnext_stateĠ=Ġstate;ĊĠĠĠĠĠĠĠĠcaseĠ(state)ĊĠĠĠĠĠĠĠĠĠĠĠĠIDLE:ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠifĠ(data_in)ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnext_stateĠ=ĠS1;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠS1:ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠifĠ(data_in)ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnext_stateĠ=ĠS10;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠendĠelseĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnext_stateĠ=ĠIDLE;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠS10:ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠifĠ(data_in)ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnext_stateĠ=ĠS101;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠendĠelseĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnext_stateĠ=ĠS1;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠS101:ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠifĠ(data_in)ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnext_stateĠ=ĠS1011;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠendĠelseĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnext_stateĠ=ĠS10;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠS1011:ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠifĠ(data_in)ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnext_stateĠ=ĠS1011;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠendĠelseĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnext_stateĠ=ĠS10;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠendcaseĊĠĠĠĠendĊĊĠĠĠĠassignĠdetectedĠ=Ġ(stateĠ==ĠS1011);ĊĊendmodulemoduleĠtop_module(ĊĠĠĠĠinputĠlogicĠclk,ĊĠĠĠĠinputĠlogicĠrst_n,ĊĠĠĠĠinputĠlogicĠdata_in,ĊĠĠĠĠoutputĠlogicĠdetectedĊ);ĊĊĠĠĠĠseq_detĠseq_det_inst(ĊĠĠĠĠĠĠĠĠ.clk(clk),ĊĠĠĠĠĠĠĠĠ.rst_n(rst_n),ĊĠĠĠĠĠĠĠĠ.data_in(data_in),ĊĠĠĠĠĠĠĠĠ.detected(detected)ĊĠĠĠĠ);ĊĊendmoduleĊĊmoduleĠseq_det(ĊĠĠĠĠinputĠlogicĠclk,ĊĠĠĠĠinputĠlogicĠrst_n,ĊĠĠĠĠinputĠlogicĠdata_in,ĊĠĠĠĠoutputĠlogicĠdetectedĊ);ĊĊĠĠĠĠtypedefĠenumĠlogicĠ[2:0]Ġ{ĊĠĠĠĠĠĠĠĠIDLEĠ=Ġ3'b000,ĊĠĠĠĠĠĠĠĠS1Ġ=Ġ3'b001,ĊĠĠĠĠĠĠĠĠS10Ġ=Ġ3'b010,ĊĠĠĠĠĠĠĠĠS101Ġ=Ġ3'b011,ĊĠĠĠĠĠĠĠĠS1011Ġ=Ġ3'b100ĊĠĠĠĠ}Ġstate_t;ĊĊĠĠĠĠstate_tĠstate,Ġnext_state;ĊĊĠĠĠĠalways_ffĠ@(posedgeĠclkĠorĠnegedgeĠrst_n)ĠbeginĊĠĠĠĠĠĠĠĠifĠ(~rst_n)ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠstateĠ<=ĠIDLE;ĊĠĠĠĠĠĠĠĠendĠelseĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠstateĠ<=Ġnext_state;ĊĠĠĠĠĠĠĠĠendĊĠĠĠĠendĊĊĠĠĠĠalways_combĠbeginĊĠĠĠĠĠĠĠĠnext_stateĠ=Ġstate;ĊĠĠĠĠĠĠĠĠcaseĠ(state)ĊĠĠĠĠĠĠĠĠĠĠĠĠIDLE:ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠifĠ(data_in)ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnext_stateĠ=ĠS1;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠS1:ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠifĠ(data_in)ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnext_stateĠ=ĠS10;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠendĠelseĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnext_stateĠ=ĠIDLE;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠS10:ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠifĠ(data_in)ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnext_stateĠ=ĠS101;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠendĠelseĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnext_stateĠ=ĠS1;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠS101:ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠifĠ(data_in)ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnext_stateĠ=ĠS1011;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠendĠelseĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnext_stateĠ=ĠS10;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠS1011:ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠifĠ(data_in)ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnext_stateĠ=ĠS1011;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠendĠelseĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnext_stateĠ=ĠS10;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠendcaseĊĠĠĠĠendĊĊĠĠĠĠassignĠdetectedĠ=Ġ(stateĠ==ĠS1011);ĊĊendmodulemoduleĠtop_module(ĊĠĠĠĠinputĠlogicĠclk,ĊĠĠĠĠinputĠlogicĠrst_n,ĊĠĠĠĠinputĠlogicĠdata_in,ĊĠĠĠĠoutputĠlogicĠdetectedĊ);ĊĊĠĠĠĠseq_detĠseq_det_inst(ĊĠĠĠĠĠĠĠĠ.clk(clk),ĊĠĠĠĠĠĠĠĠ.rst_n(rst_n),ĊĠĠĠĠĠĠĠĠ.data_in(data_in),ĊĠĠĠĠĠĠĠĠ.detected(detected)ĊĠĠĠĠ);ĊĊendmoduleĊĊmoduleĠseq_det(ĊĠĠĠĠinputĠlogicĠclk,ĊĠĠĠĠinputĠlogicĠrst_n,ĊĠĠĠĠinputĠlogicĠdata_in,ĊĠĠĠĠoutputĠlogicĠdetectedĊ);ĊĊĠĠĠĠtypedefĠenumĠlogicĠ[2:0]Ġ{ĊĠĠĠĠĠĠĠĠIDLEĠ=Ġ3'b000,ĊĠĠĠĠĠĠĠĠS1Ġ=Ġ3'b001,ĊĠĠĠĠĠĠĠĠS10Ġ=Ġ3'b010,ĊĠĠĠĠĠĠĠĠS101Ġ=Ġ3'b011,ĊĠĠĠĠĠĠĠĠS1011Ġ=Ġ3'b100ĊĠĠĠĠ}Ġstate_t;ĊĊĠĠĠĠstate_tĠstate,Ġnext_state;ĊĊĠĠĠĠalways_ffĠ@(posedgeĠclkĠorĠnegedgeĠrst_n)ĠbeginĊĠĠĠĠĠĠĠĠifĠ(~rst_n)ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠstateĠ<=ĠIDLE;ĊĠĠĠĠĠĠĠĠendĠelseĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠstateĠ<=Ġnext_state;ĊĠĠĠĠĠĠĠĠendĊĠĠĠĠendĊĊĠĠĠĠalways_combĠbeginĊĠĠĠĠĠĠĠĠnext_stateĠ=Ġstate;ĊĠĠĠĠĠĠĠĠcaseĠ(state)ĊĠĠĠĠĠĠĠĠĠĠĠĠIDLE:ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠifĠ(data_in)ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnext_stateĠ=ĠS1;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠS1:ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠifĠ(data_in)ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnext_stateĠ=ĠS10;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠendĠelseĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnext_stateĠ=ĠIDLE;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠS10:ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠifĠ(data_in)ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnext_stateĠ=ĠS101;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠendĠelseĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnext_stateĠ=ĠS1;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠS101:ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠifĠ(data_in)ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnext_stateĠ=ĠS1011;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠendĠelseĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnext_stateĠ=ĠS10;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠS1011:ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠifĠ(data_in)ĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnext_stateĠ=ĠS1011;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠendĠelseĠbeginĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠnext_stateĠ=ĠS10;ĊĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠĠĠĠĠendĊĠĠĠĠĠĠĠĠendcaseĊĠĠĠĠendĊĊĠĠĠĠassignĠdetectedĠ=Ġ(stateĠ==ĠS1011);ĊĊendmoduleĊĊmoduleĠseq_det_tb;ĊĊĠĠĠĠlogicĠclk;ĊĠĠĠĠlogicĠrst_n;ĊĠĠĠĠlogicĠdata_in;ĊĠĠĠĠlogicĠdetected;ĊĊĠĠĠĠseq_detĠdut(ĊĠĠĠĠĠĠĠĠ.clk(clk),ĊĠĠĠĠĠĠĠĠ.rst_n(rst_n),ĊĠĠĠĠĠĠĠĠ.data_in(data_in),ĊĠĠĠĠĠĠĠĠ.detected(detected)ĊĠĠĠĠ);ĊĊĠĠĠĠinitialĠbeginĊĠĠĠĠĠĠĠĠclkĠ=Ġ0;ĊĠĠĠĠĠĠĠĠrst_nĠ=Ġ0;ĊĠĠĠĠĠĠĠĠdata_inĠ=Ġ0;ĊĠĠĠĠĠĠĠĠ#10Ġrst_nĠ=Ġ1;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ1;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ0;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ1;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ0;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ1;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ0;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ1;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ0;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ1;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ0;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ1;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ0;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ1;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ0;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ1;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ0;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ1;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ0;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ1;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ0;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ1;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ0;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ1;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ0;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ1;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ0;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ1;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ0;ĊĠĠĠĠĠĠĠĠ#10Ġdata_inĠ=Ġ1;Ċ
+reg [2:0] state, next_state;
+
+always_ff @(posedge clk or negedge rst_n) begin
+if (!rst_n) begin
+state <= IDLE;
+detected <= 1'b0;
+end else begin
+state <= next_state;
+detected <= (state == S1011);
+end
+end
+
+always @* begin
+case (state)
+IDLE: begin
+if (data_in) begin
+next_state = S1;
+end else begin
+next_state = IDLE;
+end
+end
+
+  S1: begin
+    if (data_in) begin
+      next_state = S10;
+    end else begin
+      next_state = S1;
+    end
+  end
+  
+  S10: begin
+    if (data_in) begin
+      next_state = S101;
+    end else begin
+      next_state = IDLE;
+    end
+  end
+  
+  S101: begin
+    if (data_in) begin
+      next_state = S1011;
+    end else begin
+      next_state = S1;
+    end
+  end
+  
+  S1011: begin
+    next_state = S1;
+  end
+endcase
+end
+
+endmodule
